@@ -96,6 +96,7 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
 .toast{position:fixed;bottom:63px;left:50%;transform:translateX(-50%) translateY(180px);background:var(--success);color:#fff;padding:27px 58px;border-radius:54px;font-size:40px;font-weight:500;z-index:999;transition:transform 0.3s;white-space:nowrap;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{background:var(--danger)}
+.toast.warn{background:#b87a00}
 
 @media (min-width: 769px) {
   .folder-tabs::-webkit-scrollbar{height:12px}
@@ -458,6 +459,7 @@ function flashErr(){
 function openApp(){
   document.getElementById('pin-screen').style.display='none';
   document.getElementById('main-app').style.display='flex';
+  resetInactivityTimer();
   setTimeout(function(){
     var sw=window.innerWidth||document.documentElement.clientWidth||screen.width;
     if(sw<=768){
@@ -473,12 +475,74 @@ function openApp(){
   loadAll();
 }
 
-function lockApp(){_pinAttempts=0;_pinLocked=false;_cryptoKey=null;
+function lockApp(){_pinAttempts=0;_pinLocked=false;_cryptoKey=null;stopInactivityTimer();
   document.getElementById('main-app').style.display='none';
   document.getElementById('pin-screen').style.display='flex';
   document.getElementById('search-input').value='';
   S={folders:[],records:[],af:'all'};
-  initPin();
+  // ── Inactivity timer ─────────────────────────────────────────────────────────
+var _inactTimer = null;
+var _warnTimer = null;
+var _INACTIVE_MS = 5 * 60 * 1000;  // 5 minutes
+var _WARN_MS = 4.5 * 60 * 1000;    // warn at 4m30s (30s before lock)
+
+function resetInactivityTimer() {
+  if (!_cryptoKey) return; // only run when logged in
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  // dismiss any warning
+  var t = document.getElementById('toast');
+  if (t && t.className.indexOf('warn') >= 0) t.className = 'toast';
+
+  _warnTimer = setTimeout(function() {
+    toastWarn('Locking in 30 seconds due to inactivity…');
+  }, _WARN_MS);
+
+  _inactTimer = setTimeout(function() {
+    lockApp();
+    toast('Locked due to inactivity');
+  }, _INACTIVE_MS);
+}
+
+function stopInactivityTimer() {
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  _inactTimer = null;
+  _warnTimer = null;
+}
+
+function toastWarn(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show warn';
+}
+
+// Reset timer on any user interaction
+['touchstart','mousedown','mousemove','keypress','scroll','click'].forEach(function(evt) {
+  document.addEventListener(evt, resetInactivityTimer, true);
+});
+
+// Lock immediately if page becomes visible after being hidden too long
+var _hiddenAt = null;
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    _hiddenAt = Date.now();
+  } else {
+    if (_hiddenAt && _cryptoKey) {
+      var away = Date.now() - _hiddenAt;
+      if (away >= _INACTIVE_MS) {
+        lockApp();
+        toast('Locked due to inactivity');
+      } else {
+        resetInactivityTimer();
+      }
+    }
+    _hiddenAt = null;
+  }
+});
+// ── End inactivity timer ──────────────────────────────────────────────────────
+
+initPin();
 }
 
 function loadAll(){
@@ -668,6 +732,68 @@ var i,mbs=document.querySelectorAll('.modal-bg');
 for(i=0;i<mbs.length;i++){mbs[i].addEventListener('click',function(e){if(e.target===this)this.className='modal-bg';});}
 var _tt=null;
 function toast(msg,isErr){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(isErr?' err':'');if(_tt)clearTimeout(_tt);_tt=setTimeout(function(){t.className='toast';},2400);}
+
+// ── Inactivity timer ─────────────────────────────────────────────────────────
+var _inactTimer = null;
+var _warnTimer = null;
+var _INACTIVE_MS = 5 * 60 * 1000;  // 5 minutes
+var _WARN_MS = 4.5 * 60 * 1000;    // warn at 4m30s (30s before lock)
+
+function resetInactivityTimer() {
+  if (!_cryptoKey) return; // only run when logged in
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  // dismiss any warning
+  var t = document.getElementById('toast');
+  if (t && t.className.indexOf('warn') >= 0) t.className = 'toast';
+
+  _warnTimer = setTimeout(function() {
+    toastWarn('Locking in 30 seconds due to inactivity…');
+  }, _WARN_MS);
+
+  _inactTimer = setTimeout(function() {
+    lockApp();
+    toast('Locked due to inactivity');
+  }, _INACTIVE_MS);
+}
+
+function stopInactivityTimer() {
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  _inactTimer = null;
+  _warnTimer = null;
+}
+
+function toastWarn(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show warn';
+}
+
+// Reset timer on any user interaction
+['touchstart','mousedown','mousemove','keypress','scroll','click'].forEach(function(evt) {
+  document.addEventListener(evt, resetInactivityTimer, true);
+});
+
+// Lock immediately if page becomes visible after being hidden too long
+var _hiddenAt = null;
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    _hiddenAt = Date.now();
+  } else {
+    if (_hiddenAt && _cryptoKey) {
+      var away = Date.now() - _hiddenAt;
+      if (away >= _INACTIVE_MS) {
+        lockApp();
+        toast('Locked due to inactivity');
+      } else {
+        resetInactivityTimer();
+      }
+    }
+    _hiddenAt = null;
+  }
+});
+// ── End inactivity timer ──────────────────────────────────────────────────────
 
 initPin();
 </script>
