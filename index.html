@@ -272,13 +272,15 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
       document.body.style.width = '480px';
       var ps = document.getElementById('pin-screen');
       ps.style.width = '480px';
-      ps.style.margin = '0';
+      ps.style.margin = '0 auto';
       ps.style.height = '';
-      ps.style.minHeight = Math.round(sh / zoom) + 'px';
+      ps.style.minHeight = Math.round(sh / (zoom * 0.5)) + 'px';
+      ps.style.zoom = '0.5';
       var ma = document.getElementById('main-app');
       ma.style.width = '480px';
       ma.style.height = Math.round(sh / zoom) + 'px';
       ma.style.flexDirection = 'column';
+      ma.style.zoom = '1';
       var ct = document.getElementById('content');
       if (ct) { ct.style.flex = '1'; ct.style.height = ''; ct.style.overflowY = 'auto'; }
       return;
@@ -430,7 +432,8 @@ function initPin(){
   document.getElementById('pphase').textContent='';
   api({action:'getPin'},function(err,res){
     if(err||res.error){document.getElementById('psub').textContent='Could not connect.';document.getElementById('pmsg').textContent=err||res.error;return;}
-    if(!res.pin && res.pin!==0){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 — Enter new PIN';}
+    var pinVal = res.pin !== undefined && res.pin !== null && res.pin !== '' ? String(res.pin) : '';
+    if(!pinVal){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 — Enter new PIN';}
     else{phase='login';document.getElementById('psub').textContent='Enter your PIN to unlock';document.getElementById('pphase').textContent='';}
   });
 }
@@ -479,7 +482,7 @@ function h4(){
     }
     api({action:'getPin'},function(err,res){
       if(err||res.error){document.getElementById('pmsg').textContent='Connection error.';cur='';updDots();return;}
-      if(cur===String(res.pin) || cur===res.pin){
+      if(cur===String(res.pin) || cur===res.pin || cur===pinVal){
         _pinAttempts=0;
         document.getElementById('pphase').textContent='Unlocking…';
         deriveKey(cur).then(function(key){_cryptoKey=key;openApp();});
