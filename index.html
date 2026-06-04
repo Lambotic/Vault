@@ -703,7 +703,7 @@ function buildCard(r){
   h+='<div class="rfield"><div class="rlabel">Password</div><div class="pw-row"><span class="pw-text" id="pw-'+r.id+'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>';
   h+='<button class="sbtn" onclick="togPw(event,\''+r.id+'\')">Show</button><button class="sbtn" onclick="cpPw(event,\''+r.id+'\')">Copy</button></div></div>';
   if(r.notes)h+='<div class="rfield"><div class="rlabel">Notes</div><div class="rval">'+esc(r.notes)+'</div></div>';
-  h+='<div class="rbtns"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button> <button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button></div>';
+  h+='<div class="rbtns"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button> <button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button> <button class="sbtn" onclick="togCard(\''+r.id+'\')">Close</button></div>';
   h+='</div></div>';return h;
 }
 
