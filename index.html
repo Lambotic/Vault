@@ -267,7 +267,7 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
       document.body.style.minHeight = '100vh';
       // Zoom to fill width but at a sensible desktop scale
       var desiredWidth = Math.min(sw, 1200);
-      var zoom = desiredWidth / 480;
+      var zoom = (desiredWidth / 480) * 0.6;
       document.body.style.zoom = zoom;
       document.body.style.width = '480px';
       var ps = document.getElementById('pin-screen');
