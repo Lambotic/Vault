@@ -257,21 +257,23 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
     var sh = window.innerHeight || document.documentElement.clientHeight || screen.height;
 
     if (sw > 768) {
-      // Desktop: reset any mobile styles, center with CSS margin auto
+      // Desktop: use zoom to shrink the app to sensible proportions
       document.body.style.transform = '';
       document.body.style.transformOrigin = '';
-      document.body.style.width = '740px';
+      document.body.style.width = '100%';
       document.body.style.position = 'relative';
       document.body.style.margin = '0 auto';
       document.body.style.overflow = 'auto';
       document.body.style.minHeight = '100vh';
+      document.body.style.zoom = '0.45';
       var ps = document.getElementById('pin-screen');
-      ps.style.width = '';
+      ps.style.width = '480px';
+      ps.style.margin = '0 auto';
       ps.style.height = '';
-      ps.style.minHeight = '100vh';
+      ps.style.minHeight = (sh / 0.45) + 'px';
       var ma = document.getElementById('main-app');
-      ma.style.width = '';
-      ma.style.height = '100vh';
+      ma.style.width = '100%';
+      ma.style.height = (sh / 0.45) + 'px';
       ma.style.flexDirection = 'column';
       var ct = document.getElementById('content');
       if (ct) { ct.style.flex = '1'; ct.style.height = ''; ct.style.overflowY = 'auto'; }
