@@ -104,45 +104,8 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
 
 /* DESKTOP OVERRIDES */
 @media (min-width: 769px) {
-  body{transform:none !important;width:780px !important;position:relative !important;margin:0 auto !important;overflow:auto !important;min-height:100vh !important}
-  #pin-screen{width:100% !important;height:auto !important;min-height:100vh !important;padding:40px !important}
-  #main-app{width:100% !important;height:100vh !important}
-  #content{flex:1 !important;height:auto !important;overflow-y:auto !important}
-  .folder-tabs::-webkit-scrollbar{height:12px !important}
-  .folder-tabs::-webkit-scrollbar-thumb{border-radius:6px !important}
-  .topbar{padding:8px 14px !important}
-  .topbar-title{font-size:16px !important;letter-spacing:2px !important}
-  .icon-btn{width:28px !important;height:28px !important;font-size:14px !important}
-  .sync-status{font-size:11px !important}
-  .search-bar{padding:6px 14px !important}
-  .search-wrap input{font-size:13px !important;padding:7px 7px 7px 28px !important}
-  .si{font-size:13px !important;left:8px !important}
-  .ftab{font-size:13px !important;padding:8px 12px !important;border-bottom-width:2px !important}
-  .ftab.active{border-bottom-width:2px !important}
-  .folder-tabs{padding:0 8px !important}
-  .folder-name{font-size:13px !important}
-  .folder-header{margin-bottom:8px !important}
-  .add-btn{font-size:13px !important;padding:8px !important;margin-bottom:8px !important;border-radius:6px !important}
-  .hbtn{font-size:11px !important;padding:4px 8px !important}
-  .rcard{padding:10px 14px !important;margin-bottom:7px !important;border-radius:8px !important;border-width:1px !important}
-  .rtop{gap:8px !important}
-  .rtitle{font-size:15px !important}
-  .rbadge{font-size:11px !important;padding:2px 8px !important;border-radius:12px !important}
-  .rmeta{font-size:12px !important;margin-top:4px !important}
-  .rdetail{margin-top:8px !important;padding-top:8px !important;border-width:1px !important}
-  .rfield{margin-bottom:8px !important}
-  .rlabel{font-size:10px !important;margin-bottom:2px !important;letter-spacing:0.5px !important}
-  .rval{font-size:13px !important}
-  .pw-row{gap:6px !important}
-  .pw-text{font-size:13px !important;letter-spacing:1px !important}
-  .rbtns{gap:6px !important;margin-top:8px !important}
-  .sbtn{font-size:12px !important;padding:5px 10px !important;border-radius:5px !important;border-width:1px !important}
-  .hbtn{font-size:11px !important;padding:4px 8px !important}
-  .empty p{font-size:15px !important}
-  .empty span{font-size:12px !important}
-  .add-btn{font-size:13px !important;padding:9px !important;margin-bottom:8px !important}
-  .folder-name{font-size:14px !important}
-  .folder-header{margin-bottom:8px !important}
+  .folder-tabs::-webkit-scrollbar{height:8px}
+  .folder-tabs::-webkit-scrollbar-thumb{border-radius:4px}
 }
 </style>
 </head>
@@ -271,32 +234,8 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
     var sh = window.innerHeight || document.documentElement.clientHeight || screen.height;
 
     if (sw > 768) {
-      // Desktop: use zoom to shrink the app to sensible proportions
-      document.body.style.transform = '';
-      document.body.style.transformOrigin = '';
-      document.body.style.width = '100%';
-      document.body.style.position = 'relative';
-      document.body.style.margin = '0 auto';
-      document.body.style.overflow = 'auto';
-      document.body.style.minHeight = '100vh';
-      // Zoom to fill width but at a sensible desktop scale
-      var desiredWidth = Math.min(sw, 1200);
-      var zoom = (desiredWidth / 480) * 0.6;
-      document.body.style.zoom = zoom;
+      // Desktop: not used in mobile version
       document.body.style.width = '480px';
-      var ps = document.getElementById('pin-screen');
-      ps.style.width = '480px';
-      ps.style.margin = '0 auto';
-      ps.style.height = '';
-      ps.style.minHeight = Math.round(sh / (zoom * 0.5)) + 'px';
-      ps.style.zoom = '0.5';
-      var ma = document.getElementById('main-app');
-      ma.style.width = '480px';
-      ma.style.height = Math.round(sh / zoom) + 'px';
-      ma.style.flexDirection = 'column';
-      ma.style.zoom = '1';
-      var ct = document.getElementById('content');
-      if (ct) { ct.style.flex = '1'; ct.style.height = ''; ct.style.overflowY = 'auto'; }
       return;
     }
 
