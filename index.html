@@ -423,7 +423,11 @@ function h4(){
   }else if(phase==='new2'){
     if(cur===tmp){
       document.getElementById('pphase').textContent='Saving PIN...';
-      api({action:'setPin',pin:cur},function(err){if(err){document.getElementById('pmsg').textContent='Could not save PIN.';cur='';updDots();return;}openApp();});
+      var pinToSave=cur;
+      api({action:'setPin',pin:pinToSave},function(err){
+        if(err){document.getElementById('pmsg').textContent='Could not save PIN.';cur='';updDots();return;}
+        deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});
+      });
     }else{
       document.getElementById('pmsg').textContent='PINs did not match. Start again.';
       flashErr();cur='';tmp='';phase='new1';updDots();
@@ -729,7 +733,25 @@ function changePin(){
   var p1=document.getElementById('s-p1').value.trim(),p2=document.getElementById('s-p2').value.trim(),msg=document.getElementById('s-msg');
   if(!/^\d{4}$/.test(p1)){msg.textContent='PIN must be exactly 4 digits';return;}
   if(p1!==p2){msg.textContent='PINs do not match';return;}
-  api({action:'setPin',pin:p1},function(err){if(err){msg.textContent='Could not save PIN.';return;}closeModal('set-modal');toast('PIN changed');setTimeout(lockApp,1400);});
+  api({action:'setPin',pin:p1},function(err){
+    if(err){msg.textContent='Could not save PIN.';return;}
+    // Re-encrypt all records with new key then lock
+    var oldKey=_cryptoKey;
+    deriveKey(p1).then(function(newKey){
+      var jobs=S.records.map(function(r){
+        return encryptRecord(r,newKey).then(function(enc){
+          return new Promise(function(resolve){
+            api({action:'save',record:JSON.stringify(enc)},resolve);
+          });
+        });
+      });
+      Promise.all(jobs).then(function(){
+        closeModal('set-modal');
+        toast('PIN changed — records re-encrypted');
+        setTimeout(lockApp,1800);
+      });
+    });
+  });
 }
 function wipeAll(){if(!confirm('Delete ALL records, folders and PIN? Cannot be undone.'))return;if(!confirm('Are you absolutely sure?'))return;api({action:'setPin',pin:''},function(){});S={folders:[],records:[],af:'all'};lockApp();}
 function openModal(id){document.getElementById(id).className='modal-bg open';}
