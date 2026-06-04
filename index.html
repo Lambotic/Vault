@@ -53,28 +53,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Ar
 .folder-name{font-size:36px;color:var(--gold);font-weight:600}
 .folder-actions{display:flex;gap:12px}
 .add-btn{display:flex;align-items:center;justify-content:center;gap:16px;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r2);padding:24px;font-size:32px;font-family:inherit;cursor:pointer;font-weight:600;width:100%;margin-bottom:24px;-webkit-tap-highlight-color:transparent}
-.rcard{background:var(--card);border:2px solid var(--navy3);border-radius:var(--r);padding:26px 32px;margin-bottom:18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.rcard{background:var(--card);border:3px solid var(--navy3);border-radius:var(--r);padding:39px 48px;margin-bottom:27px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .rcard.open{border-color:var(--gold)}
-.rtop{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.rtitle{font-size:34px;color:var(--text);font-weight:600}
-.rbadge{font-size:24px;padding:6px 20px;border-radius:40px;background:var(--navy3);color:var(--text2);white-space:nowrap;flex-shrink:0;font-weight:500}
-.rmeta{font-size:26px;color:var(--text3);margin-top:10px}
-.rdetail{display:none;margin-top:20px;padding-top:20px;border-top:2px solid var(--navy3)}
-.rfield{margin-bottom:20px}
-.rlabel{font-size:22px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600}
-.rval{color:var(--text2);font-size:30px;word-break:break-all;white-space:pre-wrap}
-.pw-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.pw-text{font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:4px;font-size:32px;color:var(--text2)}
-.rbtns{display:flex;gap:16px;margin-top:20px;justify-content:space-between;align-items:center}
-.sbtn{background:transparent;border:2px solid var(--navy3);color:var(--text2);border-radius:12px;padding:12px 28px;font-size:26px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.rtop{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.rtitle{font-size:51px;color:var(--text);font-weight:600}
+.rbadge{font-size:36px;padding:9px 30px;border-radius:60px;background:var(--navy3);color:var(--text2);white-space:nowrap;flex-shrink:0;font-weight:500}
+.rmeta{font-size:39px;color:var(--text3);margin-top:15px}
+.rdetail{display:none;margin-top:30px;padding-top:30px;border-top:3px solid var(--navy3)}
+.rfield{margin-bottom:30px}
+.rlabel{font-size:33px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:9px;font-weight:600}
+.rval{color:var(--text2);font-size:45px;word-break:break-all;white-space:pre-wrap}
+.pw-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.pw-text{font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:6px;font-size:48px;color:var(--text2)}
+.rbtns{display:flex;gap:24px;margin-top:30px;justify-content:space-between;align-items:center}
+.sbtn{background:transparent;border:3px solid var(--navy3);color:var(--text2);border-radius:18px;padding:18px 42px;font-size:39px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .dbtn{border-color:#4a2222;color:var(--danger)}
 .lbtn{border-color:var(--gold);color:var(--gold)}
 .hbtn{background:transparent;border:2px solid var(--navy3);color:var(--text2);border-radius:12px;padding:10px 20px;font-size:24px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .hbtn-del{border-color:#4a2222;color:var(--danger)}
 .hbtn-add{border-color:var(--gold);color:var(--gold)}
 .empty{text-align:center;padding:4rem 1rem;color:var(--text3)}
-.empty p{font-size:36px;margin-bottom:12px;color:var(--text2)}
-.empty span{font-size:28px}
+.empty p{font-size:54px;margin-bottom:18px;color:var(--text2)}
+.empty span{font-size:42px}
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,0.75);z-index:200;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
 .modal{background:var(--card);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:960px;padding:44px 40px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -110,6 +110,20 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
   #content{flex:1 !important;height:auto !important;overflow-y:auto !important}
   .folder-tabs::-webkit-scrollbar{height:12px !important}
   .folder-tabs::-webkit-scrollbar-thumb{border-radius:6px !important}
+  .rcard{padding:13px 16px !important;margin-bottom:9px !important}
+  .rtitle{font-size:17px !important}
+  .rbadge{font-size:12px !important;padding:3px 10px !important}
+  .rmeta{font-size:13px !important;margin-top:5px !important}
+  .rdetail{margin-top:10px !important;padding-top:10px !important}
+  .rfield{margin-bottom:10px !important}
+  .rlabel{font-size:11px !important;margin-bottom:3px !important}
+  .rval{font-size:15px !important}
+  .pw-text{font-size:16px !important}
+  .rbtns{gap:8px !important;margin-top:10px !important}
+  .sbtn{font-size:13px !important;padding:6px 14px !important;border-radius:6px !important}
+  .hbtn{font-size:12px !important;padding:5px 10px !important}
+  .empty p{font-size:18px !important}
+  .empty span{font-size:14px !important}
 }
 </style>
 </head>
@@ -405,7 +419,7 @@ function initPin(){
   document.getElementById('pphase').textContent='';
   api({action:'getPin'},function(err,res){
     if(err||res.error){document.getElementById('psub').textContent='Could not connect.';document.getElementById('pmsg').textContent=err||res.error;return;}
-    if(!res.pin){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 \u2014 Enter new PIN';}
+    if(!res.pin && res.pin!==0){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 — Enter new PIN';}
     else{phase='login';document.getElementById('psub').textContent='Enter your PIN to unlock';document.getElementById('pphase').textContent='';}
   });
 }
@@ -425,7 +439,20 @@ function h4(){
       document.getElementById('pphase').textContent='Saving PIN...';
       var pinToSave=cur;
       api({action:'setPin',pin:pinToSave},function(err){
-        if(err){document.getElementById('pmsg').textContent='Could not save PIN.';cur='';updDots();return;}
+        // Parse errors from Apps Script can be false alarms - PIN may have saved OK
+        // Try to verify by re-reading the PIN
+        if(err){
+          api({action:'getPin'},function(err2,res2){
+            if(!err2 && res2 && String(res2.pin)===pinToSave){
+              // PIN saved successfully despite error
+              deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});
+            } else {
+              document.getElementById('pmsg').textContent='Could not save PIN. Check connection and try again.';
+              cur='';updDots();
+            }
+          });
+          return;
+        }
         deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});
       });
     }else{
@@ -441,7 +468,7 @@ function h4(){
     }
     api({action:'getPin'},function(err,res){
       if(err||res.error){document.getElementById('pmsg').textContent='Connection error.';cur='';updDots();return;}
-      if(cur===String(res.pin)){
+      if(cur===String(res.pin) || cur===res.pin){
         _pinAttempts=0;
         document.getElementById('pphase').textContent='Unlocking…';
         deriveKey(cur).then(function(key){_cryptoKey=key;openApp();});
