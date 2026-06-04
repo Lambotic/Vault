@@ -6,101 +6,186 @@
 <title>Vault</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#1a2340;--navy3:#2d3a5c;--gold:#c9a84c;--text:#f0f0f0;--text2:#a0a8bb;--text3:#6b7490;--card:#1e2744;--card2:#252f50;--danger:#e24b4a;--success:#1a9e75;--r:29px;--r2:19px}
-html,body{margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--navy);color:var(--text);width:100%;position:relative;top:0;left:0}
+:root{
+  --navy:#1a2340;--navy3:#2d3a5c;--gold:#c9a84c;
+  --text:#f0f0f0;--text2:#a0a8bb;--text3:#6b7490;
+  --card:#1e2744;--card2:#252f50;--danger:#e24b4a;--success:#1a9e75;
+  --r:14px;--r2:10px
+}
+html,body{height:100%;width:100%;overflow:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  background:var(--navy);color:var(--text);
+  display:flex;flex-direction:column;
+}
 
-/* PIN SCREEN */
-#pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 48px;min-height:100vh}
-.vault-icon{width:120px;height:120px;border-radius:50%;background:var(--card2);border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
-.app-title{font-size:62px;color:var(--gold);letter-spacing:10px;margin-bottom:14px;font-weight:600}
-.app-sub{font-size:34px;color:var(--text2);margin-bottom:10px;text-align:center;line-height:1.4}
-.pin-phase{font-size:29px;color:var(--gold);margin-bottom:24px;text-align:center;min-height:34px}
-.pin-dots{display:flex;gap:24px;margin-bottom:34px}
-.pin-dot{width:34px;height:34px;border-radius:50%;border:4px solid var(--text3)}
+/* ── PIN SCREEN ── */
+#pin-screen{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex:1;padding:2rem 3rem;min-height:100vh;
+}
+.vault-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:var(--card2);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem
+}
+.app-title{font-size:2rem;color:var(--gold);letter-spacing:0.4rem;margin-bottom:0.4rem;font-weight:600}
+.app-sub{font-size:1rem;color:var(--text2);margin-bottom:0.3rem;text-align:center;line-height:1.5}
+.pin-phase{font-size:0.85rem;color:var(--gold);margin-bottom:1rem;text-align:center;min-height:1.1rem}
+.pin-dots{display:flex;gap:1rem;margin-bottom:1.4rem}
+.pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--text3)}
 .pin-dot.filled{background:var(--gold);border-color:var(--gold)}
 .pin-dot.error{background:var(--danger);border-color:var(--danger)}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;width:100%}
-.key{height:120px;border-radius:var(--r2);border:2px solid var(--navy3);background:var(--card2);color:var(--text);font-size:50px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;font-family:inherit}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:0.7rem;width:100%}
+.key{
+  height:72px;border-radius:var(--r2);border:1px solid var(--navy3);
+  background:var(--card2);color:var(--text);font-size:1.6rem;font-weight:500;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;font-family:inherit
+}
 .key:active{background:var(--navy3)}
 .key.gold{color:var(--gold)}
-.pin-msg{font-size:31px;color:var(--danger);margin-top:17px;min-height:38px;text-align:center}
+.pin-msg{font-size:0.9rem;color:var(--danger);margin-top:0.8rem;min-height:1.1rem;text-align:center}
 
-/* MAIN APP */
-#main-app{display:none;flex-direction:column;overflow:hidden;width:100%}
-.topbar{background:var(--card);border-bottom:2px solid var(--navy3);padding:24px 29px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.topbar-title{font-size:41px;color:var(--gold);letter-spacing:5px;font-weight:600}
-.topbar-right{display:flex;gap:14px;align-items:center}
-.icon-btn{width:72px;height:72px;border-radius:var(--r2);border:2px solid var(--navy3);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;font-size:36px}
+/* ── MAIN APP ── */
+#main-app{display:none;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{
+  background:var(--card);border-bottom:1px solid var(--navy3);
+  padding:0.9rem 1.1rem;display:flex;align-items:center;
+  justify-content:space-between;flex-shrink:0
+}
+.topbar-title{font-size:1.2rem;color:var(--gold);letter-spacing:0.2rem;font-weight:600}
+.topbar-right{display:flex;gap:0.5rem;align-items:center}
+.icon-btn{
+  width:42px;height:42px;border-radius:var(--r2);border:1px solid var(--navy3);
+  background:transparent;color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;font-size:1.2rem
+}
 .icon-btn:active{background:var(--card2)}
-.sync-status{font-size:24px;color:var(--text3);margin-right:7px}
+.sync-status{font-size:0.75rem;color:var(--text3);margin-right:0.3rem}
 .sync-status.ok{color:var(--success)}
 .sync-status.err{color:var(--danger)}
-.search-bar{padding:19px 29px;background:var(--card);border-bottom:2px solid var(--navy3);flex-shrink:0}
-.search-wrap{position:relative}
-.search-wrap input{width:100%;background:var(--navy);border:2px solid var(--navy3);border-radius:var(--r2);padding:19px 19px 19px 62px;color:var(--text);font-size:31px;font-family:inherit;outline:none}
-.search-wrap input:focus{border-color:var(--gold)}
-.si{position:absolute;left:19px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:31px;pointer-events:none}
-.folder-tabs{display:flex;overflow-x:auto;background:var(--card);border-bottom:2px solid var(--navy3);padding:0 14px;flex-shrink:0;-webkit-overflow-scrolling:touch}
-.folder-tabs::-webkit-scrollbar{height:6px}
-.folder-tabs::-webkit-scrollbar-track{background:var(--navy)}
-.folder-tabs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:5px}
-.ftab{padding:19px 22px;font-size:31px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;border-bottom:5px solid transparent;-webkit-tap-highlight-color:transparent;flex-shrink:0}
-.ftab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.content{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:24px 29px}
-.folder-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:19px}
-.folder-name{font-size:36px;color:var(--gold);font-weight:600}
-.folder-actions{display:flex;gap:12px}
-.add-btn{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r2);padding:24px;font-size:34px;font-family:inherit;cursor:pointer;font-weight:600;width:100%;margin-bottom:24px;-webkit-tap-highlight-color:transparent}
 
-/* RECORD CARDS - large for mobile readability */
-.rcard{background:var(--card);border:2px solid var(--navy3);border-radius:var(--r);padding:29px 34px;margin-bottom:17px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.search-bar{padding:0.6rem 1.1rem;background:var(--card);border-bottom:1px solid var(--navy3);flex-shrink:0}
+.search-wrap{position:relative}
+.search-wrap input{
+  width:100%;background:var(--navy);border:1px solid var(--navy3);
+  border-radius:var(--r2);padding:0.6rem 0.6rem 0.6rem 2.2rem;
+  color:var(--text);font-size:1rem;font-family:inherit;outline:none
+}
+.search-wrap input:focus{border-color:var(--gold)}
+.si{position:absolute;left:0.7rem;top:50%;transform:translateY(-50%);color:var(--text3);font-size:1rem;pointer-events:none}
+
+.folder-tabs{
+  display:flex;overflow-x:auto;background:var(--card);
+  border-bottom:1px solid var(--navy3);padding:0 0.5rem;
+  flex-shrink:0;-webkit-overflow-scrolling:touch
+}
+.folder-tabs::-webkit-scrollbar{height:4px}
+.folder-tabs::-webkit-scrollbar-track{background:var(--navy)}
+.folder-tabs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.ftab{
+  padding:0.7rem 0.9rem;font-size:0.95rem;font-weight:500;color:var(--text2);
+  cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;
+  -webkit-tap-highlight-color:transparent;flex-shrink:0
+}
+.ftab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0.9rem 1.1rem}
+.folder-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem}
+.folder-name{font-size:1.1rem;color:var(--gold);font-weight:600}
+.folder-actions{display:flex;gap:0.4rem}
+.add-btn{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gold);color:var(--navy);border:none;border-radius:var(--r2);
+  padding:0.8rem;font-size:1rem;font-family:inherit;cursor:pointer;
+  font-weight:600;width:100%;margin-bottom:0.8rem;
+  -webkit-tap-highlight-color:transparent
+}
+
+/* ── RECORD CARDS ── */
+.rcard{
+  background:var(--card);border:1px solid var(--navy3);border-radius:var(--r);
+  padding:0.9rem 1rem;margin-bottom:0.6rem;cursor:pointer;
+  -webkit-tap-highlight-color:transparent
+}
 .rcard.open{border-color:var(--gold)}
-.rtop{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.rtitle{font-size:41px;color:var(--text);font-weight:600}
-.rbadge{font-size:26px;padding:7px 22px;border-radius:36px;background:var(--navy3);color:var(--text2);white-space:nowrap;flex-shrink:0;font-weight:500}
-.rmeta{font-size:29px;color:var(--text3);margin-top:10px}
-.rdetail{display:none;margin-top:22px;padding-top:22px;border-top:2px solid var(--navy3)}
-.rfield{margin-bottom:22px}
-.rlabel{font-size:24px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;font-weight:600}
-.rval{color:var(--text2);font-size:34px;word-break:break-all;white-space:pre-wrap}
-.pw-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pw-text{font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:4px;font-size:36px;color:var(--text2)}
-.rbtns{display:flex;gap:14px;margin-top:22px;justify-content:space-between;align-items:center}
-.sbtn{background:transparent;border:2px solid var(--navy3);color:var(--text2);border-radius:12px;padding:14px 29px;font-size:29px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.rtop{display:flex;align-items:center;justify-content:space-between;gap:0.5rem}
+.rtitle{font-size:1.1rem;color:var(--text);font-weight:600}
+.rbadge{
+  font-size:0.75rem;padding:0.2rem 0.6rem;border-radius:20px;
+  background:var(--navy3);color:var(--text2);white-space:nowrap;flex-shrink:0;font-weight:500
+}
+.rmeta{font-size:0.8rem;color:var(--text3);margin-top:0.3rem}
+.rdetail{display:none;margin-top:0.7rem;padding-top:0.7rem;border-top:1px solid var(--navy3)}
+.rfield{margin-bottom:0.7rem}
+.rlabel{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.2rem;font-weight:600}
+.rval{color:var(--text2);font-size:0.95rem;word-break:break-all;white-space:pre-wrap}
+.pw-row{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
+.pw-text{font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:2px;font-size:1rem;color:var(--text2)}
+.rbtns{display:flex;gap:0.5rem;margin-top:0.7rem;justify-content:space-between;align-items:center}
+.sbtn{
+  background:transparent;border:1px solid var(--navy3);color:var(--text2);
+  border-radius:6px;padding:0.4rem 0.8rem;font-size:0.85rem;font-weight:500;
+  cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent
+}
 .dbtn{border-color:#4a2222;color:var(--danger)}
 .lbtn{border-color:var(--gold);color:var(--gold)}
-.hbtn{background:transparent;border:2px solid var(--navy3);color:var(--text2);border-radius:10px;padding:10px 19px;font-size:24px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.hbtn{
+  background:transparent;border:1px solid var(--navy3);color:var(--text2);
+  border-radius:5px;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:500;
+  cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent
+}
 .hbtn-del{border-color:#4a2222;color:var(--danger)}
 .hbtn-add{border-color:var(--gold);color:var(--gold)}
-.empty{text-align:center;padding:4rem 1rem;color:var(--text3)}
-.empty p{font-size:36px;margin-bottom:12px;color:var(--text2)}
-.empty span{font-size:29px}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text3)}
+.empty p{font-size:1.1rem;margin-bottom:0.4rem;color:var(--text2)}
+.empty span{font-size:0.9rem}
 
-/* MODALS */
-.modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,0.75);z-index:200;align-items:flex-end;justify-content:center}
+/* ── MODALS ── */
+.modal-bg{
+  display:none;position:fixed;top:0;right:0;bottom:0;left:0;
+  background:rgba(0,0,0,0.75);z-index:200;align-items:flex-end;justify-content:center
+}
 .modal-bg.open{display:flex}
-.modal{background:var(--card);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:100%;padding:36px 34px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.modal-title{font-size:41px;color:var(--gold);margin-bottom:26px;font-weight:600}
-.notice{font-size:26px;color:var(--text3);text-align:center;padding:17px 22px;background:var(--navy);border-radius:var(--r2);margin-bottom:24px;line-height:1.5}
-.fg{margin-bottom:24px}
-.fl{font-size:24px;color:var(--text3);margin-bottom:10px;display:block;text-transform:uppercase;letter-spacing:1px;font-weight:600}
-.fi{width:100%;background:var(--navy);border:2px solid var(--navy3);border-radius:var(--r2);padding:19px 22px;color:var(--text);font-size:31px;font-family:inherit;outline:none;-webkit-appearance:none}
+.modal{
+  background:var(--card);border-radius:var(--r) var(--r) 0 0;width:100%;
+  padding:1.4rem 1.2rem;max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch
+}
+.modal-title{font-size:1.2rem;color:var(--gold);margin-bottom:1rem;font-weight:600}
+.notice{
+  font-size:0.8rem;color:var(--text3);text-align:center;
+  padding:0.5rem 0.7rem;background:var(--navy);border-radius:var(--r2);
+  margin-bottom:0.9rem;line-height:1.5
+}
+.fg{margin-bottom:0.9rem}
+.fl{font-size:0.75rem;color:var(--text3);margin-bottom:0.3rem;display:block;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+.fi{
+  width:100%;background:var(--navy);border:1px solid var(--navy3);border-radius:var(--r2);
+  padding:0.7rem 0.8rem;color:var(--text);font-size:1rem;font-family:inherit;
+  outline:none;-webkit-appearance:none
+}
 .fi:focus{border-color:var(--gold)}
 select.fi option{background:#1a2340}
 textarea.fi{resize:none;overflow:hidden;line-height:1.5}
-.mactions{display:flex;gap:17px;margin-top:14px}
-.bp{flex:1;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r2);padding:22px;font-size:34px;font-family:inherit;cursor:pointer;font-weight:600}
-.bc{flex:1;background:transparent;color:var(--text2);border:2px solid var(--navy3);border-radius:var(--r2);padding:22px;font-size:34px;font-family:inherit;cursor:pointer}
-.ssect{margin-bottom:31px;padding-bottom:31px;border-bottom:2px solid var(--navy3)}
+.mactions{display:flex;gap:0.7rem;margin-top:0.6rem}
+.bp{flex:1;background:var(--gold);color:var(--navy);border:none;border-radius:var(--r2);padding:0.8rem;font-size:1rem;font-family:inherit;cursor:pointer;font-weight:600}
+.bc{flex:1;background:transparent;color:var(--text2);border:1px solid var(--navy3);border-radius:var(--r2);padding:0.8rem;font-size:1rem;font-family:inherit;cursor:pointer}
+.ssect{margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--navy3)}
 .ssect:last-child{border-bottom:none;margin-bottom:0}
-.ssect h3{font-size:24px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-weight:600;margin-bottom:19px}
-.stbtn{width:100%;background:var(--card2);border:2px solid var(--navy3);color:var(--text);border-radius:var(--r2);padding:22px 24px;font-size:31px;font-family:inherit;cursor:pointer;text-align:left;margin-bottom:14px;font-weight:500}
+.ssect h3{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-bottom:0.8rem}
+.stbtn{width:100%;background:var(--card2);border:1px solid var(--navy3);color:var(--text);border-radius:var(--r2);padding:0.7rem 0.9rem;font-size:0.95rem;font-family:inherit;cursor:pointer;text-align:left;margin-bottom:0.5rem;font-weight:500}
 .danger-btn{color:var(--danger)}
-.loading{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:31px}
-.spinner{display:inline-block;width:48px;height:48px;border:4px solid var(--navy3);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:19px}
+.loading{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:0.95rem}
+.spinner{display:inline-block;width:28px;height:28px;border:2px solid var(--navy3);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin-bottom:0.8rem}
 @keyframes spin{to{transform:rotate(360deg)}}
-.toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%) translateY(96px);background:var(--success);color:#fff;padding:17px 36px;border-radius:36px;font-size:29px;font-weight:500;z-index:999;transition:transform 0.3s;white-space:nowrap;pointer-events:none}
+.toast{
+  position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(4rem);
+  background:var(--success);color:#fff;padding:0.6rem 1.4rem;border-radius:1.2rem;
+  font-size:0.85rem;font-weight:500;z-index:999;transition:transform 0.3s;
+  white-space:nowrap;pointer-events:none
+}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.err{background:var(--danger)}
 .toast.warn{background:#b87a00}
@@ -110,7 +195,7 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
 
 <div id="pin-screen">
   <div class="vault-icon">
-    <svg viewBox="0 0 24 24" style="width:50px;height:50px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round">
+    <svg viewBox="0 0 24 24" style="width:38px;height:38px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round">
       <rect x="3" y="11" width="18" height="11" rx="2"/>
       <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
       <circle cx="12" cy="16" r="1.5" fill="var(--gold)" stroke="none"/>
@@ -173,9 +258,9 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
     <div class="fg"><label class="fl">Username / Login</label><input class="fi" id="f-login" placeholder="username or email" autocomplete="off" autocapitalize="off"></div>
     <div class="fg"><label class="fl">Password</label>
       <input class="fi" id="f-pw" type="password" placeholder="password" autocomplete="new-password">
-      <div style="display:flex;gap:10px;margin-top:10px">
-        <button type="button" class="sbtn" onclick="togFormPw()" id="f-pw-eye">Show password</button>
-        <button type="button" class="sbtn" onclick="cpFormPw()">Copy password</button>
+      <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+        <button type="button" class="sbtn" onclick="togFormPw()" id="f-pw-eye">Show</button>
+        <button type="button" class="sbtn" onclick="cpFormPw()">Copy</button>
       </div>
     </div>
     <div class="fg"><label class="fl">Folder</label><select class="fi" id="f-folder"></select></div>
@@ -207,12 +292,12 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
       <h3>Change PIN</h3>
       <div class="fg"><label class="fl">New PIN (4 digits)</label><input class="fi" id="s-p1" type="password" inputmode="numeric" maxlength="4" placeholder="New PIN"></div>
       <div class="fg"><label class="fl">Confirm PIN</label><input class="fi" id="s-p2" type="password" inputmode="numeric" maxlength="4" placeholder="Repeat PIN"></div>
-      <div id="s-msg" style="font-size:22px;color:var(--danger);min-height:28px;margin-bottom:12px"></div>
+      <div id="s-msg" style="font-size:0.85rem;color:var(--danger);min-height:1rem;margin-bottom:0.5rem"></div>
       <button class="bp" style="width:100%" onclick="changePin()">Change PIN</button>
     </div>
     <div class="ssect">
       <h3>Data</h3>
-      <p style="font-size:22px;color:var(--text3);line-height:1.6">Your records are stored in Google Sheets and sync automatically across all your devices. No manual backup needed.</p>
+      <p style="font-size:0.85rem;color:var(--text3);line-height:1.6">Records stored in Google Sheets, syncing across all devices automatically.</p>
     </div>
     <div class="ssect">
       <h3>Danger Zone</h3>
@@ -225,26 +310,87 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
 <div class="toast" id="toast"></div>
 
 <script>
-// No scaling - CSS sized directly for iPhone
-(function() {
-  function setHeights() {
-    var sh = window.innerHeight || document.documentElement.clientHeight || screen.height;
-    var ps = document.getElementById('pin-screen');
-    var ma = document.getElementById('main-app');
-    if (ps) ps.style.minHeight = sh + 'px';
-    if (ma) ma.style.height = sh + 'px';
-    var content = document.getElementById('content');
-    if (content && ma) {
-      var usedH = 0, children = ma.children;
-      for (var i = 0; i < children.length; i++) { if (children[i] !== content) usedH += children[i].offsetHeight; }
-      content.style.height = (sh - usedH) + 'px';
-    }
-  }
-  setHeights();
-  window.addEventListener('resize', setHeights);
-})();
-
 var API = 'https://script.google.com/macros/s/AKfycbxg5bbiRP6uFyRIvgZjPzYn6hN57St7KZQbwvoVyCsTTSiq7qbSkNqbLzrkojHjmQ_I/exec';
+
+// ── Encryption (AES-GCM via WebCrypto) ──────────────────────────────────────
+var _cryptoKey = null;
+
+async function deriveKey(pin) {
+  var enc = new TextEncoder();
+  var keyMaterial = await crypto.subtle.importKey(
+    'raw', enc.encode(pin), {name:'PBKDF2'}, false, ['deriveKey']
+  );
+  return crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt:enc.encode('vault-salt-v1'), iterations:100000, hash:'SHA-256'},
+    keyMaterial, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']
+  );
+}
+
+async function encryptStr(plaintext, key) {
+  var enc = new TextEncoder();
+  var iv = crypto.getRandomValues(new Uint8Array(12));
+  var ct = await crypto.subtle.encrypt({name:'AES-GCM', iv:iv}, key, enc.encode(plaintext));
+  var buf = new Uint8Array(iv.byteLength + ct.byteLength);
+  buf.set(iv, 0); buf.set(new Uint8Array(ct), iv.byteLength);
+  return 'ENC:' + btoa(String.fromCharCode(...buf));
+}
+
+async function decryptStr(ciphertext, key) {
+  if (!ciphertext || !ciphertext.startsWith('ENC:')) return ciphertext; // unencrypted legacy
+  try {
+    var raw = atob(ciphertext.slice(4));
+    var buf = new Uint8Array(raw.length);
+    for (var i=0;i<raw.length;i++) buf[i]=raw.charCodeAt(i);
+    var iv = buf.slice(0,12);
+    var ct = buf.slice(12);
+    var dec = await crypto.subtle.decrypt({name:'AES-GCM', iv:iv}, key, ct);
+    return new TextDecoder().decode(dec);
+  } catch(e) { return ciphertext; } // fallback
+}
+
+async function encryptRecord(rec, key) {
+  var r = Object.assign({}, rec);
+  if (r.password) r.password = await encryptStr(r.password, key);
+  if (r.login)    r.login    = await encryptStr(r.login,    key);
+  if (r.notes)    r.notes    = await encryptStr(r.notes,    key);
+  if (r.url)      r.url      = await encryptStr(r.url,      key);
+  return r;
+}
+
+async function decryptRecord(rec, key) {
+  var r = Object.assign({}, rec);
+  r.password = await decryptStr(r.password||'', key);
+  r.login    = await decryptStr(r.login||'',    key);
+  r.notes    = await decryptStr(r.notes||'',    key);
+  r.url      = await decryptStr(r.url||'',      key);
+  return r;
+}
+
+// Migrate any unencrypted records on first login with new version
+async function migrateIfNeeded(records, key) {
+  var toSave = [];
+  for (var i=0;i<records.length;i++) {
+    var r = records[i];
+    var needsMigration = (r.password && !r.password.startsWith('ENC:')) ||
+                         (r.login    && !r.login.startsWith('ENC:'))    ||
+                         (r.notes    && !r.notes.startsWith('ENC:'))    ||
+                         (r.url      && !r.url.startsWith('ENC:'));
+    if (needsMigration) toSave.push(await encryptRecord(r, key));
+  }
+  if (toSave.length > 0) {
+    for (var j=0;j<toSave.length;j++) {
+      api({action:'save', record:JSON.stringify(toSave[j])}, function(){});
+    }
+    console.log('Migrated ' + toSave.length + ' records to encrypted storage');
+  }
+}
+// ── End Encryption ───────────────────────────────────────────────────────────
+
+// ── PIN lockout ──────────────────────────────────────────────────────────────
+var _pinAttempts = 0;
+var _pinLocked = false;
+// ── End lockout ──────────────────────────────────────────────────────────────
+
 var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function fmtDate(d){var day=d.getDate();return(day<10?'0':'')+day+' '+MON[d.getMonth()]+' '+d.getFullYear();}
@@ -270,79 +416,6 @@ function setSyncStatus(state){
   else{el.textContent='\u25cf Offline';el.className='sync-status err';}
 }
 
-// Encryption
-var _cryptoKey=null;
-async function deriveKey(pin){
-  var enc=new TextEncoder();
-  var km=await crypto.subtle.importKey('raw',enc.encode(pin),{name:'PBKDF2'},false,['deriveKey']);
-  return crypto.subtle.deriveKey({name:'PBKDF2',salt:enc.encode('vault-salt-v1'),iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
-}
-async function encryptStr(pt,key){
-  var enc=new TextEncoder();
-  var iv=crypto.getRandomValues(new Uint8Array(12));
-  var ct=await crypto.subtle.encrypt({name:'AES-GCM',iv:iv},key,enc.encode(pt));
-  var buf=new Uint8Array(iv.byteLength+ct.byteLength);
-  buf.set(iv,0);buf.set(new Uint8Array(ct),iv.byteLength);
-  return 'ENC:'+btoa(String.fromCharCode(...buf));
-}
-async function decryptStr(ct,key){
-  if(!ct||!ct.startsWith('ENC:'))return ct;
-  try{
-    var raw=atob(ct.slice(4));
-    var buf=new Uint8Array(raw.length);
-    for(var i=0;i<raw.length;i++)buf[i]=raw.charCodeAt(i);
-    var dec=await crypto.subtle.decrypt({name:'AES-GCM',iv:buf.slice(0,12)},key,buf.slice(12));
-    return new TextDecoder().decode(dec);
-  }catch(e){return ct;}
-}
-async function encryptRecord(r,key){
-  var o=Object.assign({},r);
-  if(o.password)o.password=await encryptStr(o.password,key);
-  if(o.login)o.login=await encryptStr(o.login,key);
-  if(o.notes)o.notes=await encryptStr(o.notes,key);
-  if(o.url)o.url=await encryptStr(o.url,key);
-  return o;
-}
-async function decryptRecord(r,key){
-  var o=Object.assign({},r);
-  o.password=await decryptStr(o.password||'',key);
-  o.login=await decryptStr(o.login||'',key);
-  o.notes=await decryptStr(o.notes||'',key);
-  o.url=await decryptStr(o.url||'',key);
-  return o;
-}
-async function migrateIfNeeded(records,key){
-  var toSave=[];
-  for(var i=0;i<records.length;i++){
-    var r=records[i];
-    if((r.password&&!r.password.startsWith('ENC:'))||(r.login&&!r.login.startsWith('ENC:'))||(r.notes&&!r.notes.startsWith('ENC:'))||(r.url&&!r.url.startsWith('ENC:')))
-      toSave.push(await encryptRecord(r,key));
-  }
-  for(var j=0;j<toSave.length;j++)api({action:'save',record:JSON.stringify(toSave[j])},function(){});
-}
-
-// PIN lockout
-var _pinAttempts=0,_pinLocked=false;
-
-// Inactivity timer
-var _inactTimer=null,_warnTimer=null,_INACTIVE_MS=5*60*1000,_WARN_MS=4.5*60*1000;
-function resetInactivityTimer(){
-  if(!_cryptoKey)return;
-  clearTimeout(_inactTimer);clearTimeout(_warnTimer);
-  var t=document.getElementById('toast');
-  if(t&&t.className.indexOf('warn')>=0)t.className='toast';
-  _warnTimer=setTimeout(function(){toastWarn('Locking in 30 seconds\u2026');},_WARN_MS);
-  _inactTimer=setTimeout(function(){lockApp();toast('Locked due to inactivity');},_INACTIVE_MS);
-}
-function stopInactivityTimer(){clearTimeout(_inactTimer);clearTimeout(_warnTimer);}
-function toastWarn(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show warn';}
-['touchstart','mousedown','mousemove','keypress','scroll','click'].forEach(function(evt){document.addEventListener(evt,resetInactivityTimer,true);});
-var _hiddenAt=null;
-document.addEventListener('visibilitychange',function(){
-  if(document.hidden){_hiddenAt=Date.now();}
-  else{if(_hiddenAt&&_cryptoKey){var away=Date.now()-_hiddenAt;if(away>=_INACTIVE_MS){lockApp();toast('Locked due to inactivity');}else resetInactivityTimer();}_hiddenAt=null;}
-});
-
 var S={folders:[],records:[],af:'all'};
 var cur='',phase='new1',tmp='';
 var eRec=null,eFol=null;
@@ -354,8 +427,8 @@ function initPin(){
   document.getElementById('pphase').textContent='';
   api({action:'getPin'},function(err,res){
     if(err||res.error){document.getElementById('psub').textContent='Could not connect.';document.getElementById('pmsg').textContent=err||res.error;return;}
-    var pinVal=res.pin!==undefined&&res.pin!==null&&res.pin!==''?String(res.pin):'';
-    if(!pinVal){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 \u2014 Enter new PIN';}
+    var pinVal = res.pin !== undefined && res.pin !== null && res.pin !== '' ? String(res.pin) : '';
+    if(!pinVal){phase='new1';document.getElementById('psub').textContent='Welcome! Choose a 4-digit PIN.';document.getElementById('pphase').textContent='Step 1 of 2 — Enter new PIN';}
     else{phase='login';document.getElementById('psub').textContent='Enter your PIN to unlock';document.getElementById('pphase').textContent='';}
   });
 }
@@ -375,11 +448,19 @@ function h4(){
       document.getElementById('pphase').textContent='Saving PIN...';
       var pinToSave=cur;
       api({action:'setPin',pin:pinToSave},function(err){
+        // Parse errors from Apps Script can be false alarms - PIN may have saved OK
+        // Try to verify by re-reading the PIN
         if(err){
           api({action:'getPin'},function(err2,res2){
-            if(!err2&&res2&&String(res2.pin)===pinToSave){deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});}
-            else{document.getElementById('pmsg').textContent='Could not save PIN. Try again.';cur='';updDots();}
-          });return;
+            if(!err2 && res2 && String(res2.pin)===pinToSave){
+              // PIN saved successfully despite error
+              deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});
+            } else {
+              document.getElementById('pmsg').textContent='Could not save PIN. Check connection and try again.';
+              cur='';updDots();
+            }
+          });
+          return;
         }
         deriveKey(pinToSave).then(function(key){_cryptoKey=key;openApp();});
       });
@@ -390,18 +471,27 @@ function h4(){
       document.getElementById('pphase').textContent='Step 1 of 2 \u2014 Enter new PIN';
     }
   }else{
-    if(_pinLocked){document.getElementById('pmsg').textContent='Vault locked. Reload to try again.';cur='';updDots();return;}
+    if(_pinLocked){
+      document.getElementById('pmsg').textContent='Vault locked. Reload the page to try again.';
+      cur='';updDots();return;
+    }
     api({action:'getPin'},function(err,res){
       if(err||res.error){document.getElementById('pmsg').textContent='Connection error.';cur='';updDots();return;}
-      if(cur===String(res.pin)||cur===res.pin){
+      if(cur===String(res.pin) || cur===res.pin || cur===pinVal){
         _pinAttempts=0;
-        document.getElementById('pphase').textContent='Unlocking\u2026';
+        document.getElementById('pphase').textContent='Unlocking…';
         deriveKey(cur).then(function(key){_cryptoKey=key;openApp();});
       }else{
         _pinAttempts++;
         var left=3-_pinAttempts;
-        if(_pinAttempts>=3){_pinLocked=true;flashErr();cur='';updDots();document.getElementById('pmsg').textContent='Too many wrong attempts \u2014 Vault locked. Reload to try again.';}
-        else{document.getElementById('pmsg').textContent='Incorrect PIN. '+left+' attempt'+(left===1?'':'s')+' remaining.';flashErr();cur='';updDots();}
+        if(_pinAttempts>=3){
+          _pinLocked=true;
+          flashErr();cur='';updDots();
+          document.getElementById('pmsg').textContent='Too many wrong attempts — Vault locked. Reload to try again.';
+        }else{
+          document.getElementById('pmsg').textContent='Incorrect PIN. '+left+' attempt'+(left===1?'':'s')+' remaining.';
+          flashErr();cur='';updDots();
+        }
       }
     });
   }
@@ -417,14 +507,15 @@ function openApp(){
   document.getElementById('main-app').style.display='flex';
   resetInactivityTimer();
   setTimeout(function(){
-    var sh=window.innerHeight||document.documentElement.clientHeight||screen.height;
-    var ma=document.getElementById('main-app');
-    var content=document.getElementById('content');
-    if(ma&&content){
-      ma.style.height=sh+'px';
+    var sw=window.innerWidth||document.documentElement.clientWidth||screen.width;
+    if(sw<=768){
+      var sh=window.innerHeight||document.documentElement.clientHeight||screen.height;
+      var scale=sw/480, logicalH=Math.round(sh/scale);
+      var ma=document.getElementById('main-app');
+      var content=document.getElementById('content');
       var usedH=0,children=ma.children;
       for(var i=0;i<children.length;i++){if(children[i]!==content)usedH+=children[i].offsetHeight;}
-      content.style.height=(sh-usedH)+'px';
+      content.style.height=(logicalH-usedH)+'px';
     }
   },50);
   loadAll();
@@ -435,7 +526,69 @@ function lockApp(){_pinAttempts=0;_pinLocked=false;_cryptoKey=null;stopInactivit
   document.getElementById('pin-screen').style.display='flex';
   document.getElementById('search-input').value='';
   S={folders:[],records:[],af:'all'};
-  initPin();
+  // ── Inactivity timer ─────────────────────────────────────────────────────────
+var _inactTimer = null;
+var _warnTimer = null;
+var _INACTIVE_MS = 5 * 60 * 1000;  // 5 minutes
+var _WARN_MS = 4.5 * 60 * 1000;    // warn at 4m30s (30s before lock)
+
+function resetInactivityTimer() {
+  if (!_cryptoKey) return; // only run when logged in
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  // dismiss any warning
+  var t = document.getElementById('toast');
+  if (t && t.className.indexOf('warn') >= 0) t.className = 'toast';
+
+  _warnTimer = setTimeout(function() {
+    toastWarn('Locking in 30 seconds due to inactivity…');
+  }, _WARN_MS);
+
+  _inactTimer = setTimeout(function() {
+    lockApp();
+    toast('Locked due to inactivity');
+  }, _INACTIVE_MS);
+}
+
+function stopInactivityTimer() {
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  _inactTimer = null;
+  _warnTimer = null;
+}
+
+function toastWarn(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show warn';
+}
+
+// Reset timer on any user interaction
+['touchstart','mousedown','mousemove','keypress','scroll','click'].forEach(function(evt) {
+  document.addEventListener(evt, resetInactivityTimer, true);
+});
+
+// Lock immediately if page becomes visible after being hidden too long
+var _hiddenAt = null;
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    _hiddenAt = Date.now();
+  } else {
+    if (_hiddenAt && _cryptoKey) {
+      var away = Date.now() - _hiddenAt;
+      if (away >= _INACTIVE_MS) {
+        lockApp();
+        toast('Locked due to inactivity');
+      } else {
+        resetInactivityTimer();
+      }
+    }
+    _hiddenAt = null;
+  }
+});
+// ── End inactivity timer ──────────────────────────────────────────────────────
+
+initPin();
 }
 
 function loadAll(){
@@ -443,9 +596,13 @@ function loadAll(){
   document.getElementById('content').innerHTML='<div class="loading"><div class="spinner"></div><br>Loading your records...</div>';
   api({action:'getAll'},function(err,res){
     if(err||res.error){setSyncStatus('err');document.getElementById('content').innerHTML='<div class="loading">Could not load records.</div>';return;}
-    var rawRecords=res.records||[];S.folders=res.folders||[];
+    var rawRecords=res.records||[];
+    S.folders=res.folders||[];
+    // Decrypt all records then migrate any unencrypted ones
     Promise.all(rawRecords.map(function(r){return decryptRecord(r,_cryptoKey);})).then(function(decrypted){
-      S.records=decrypted;setSyncStatus('ok');renderTabs();renderContent();migrateIfNeeded(rawRecords,_cryptoKey);
+      S.records=decrypted;
+      setSyncStatus('ok');renderTabs();renderContent();
+      migrateIfNeeded(rawRecords,_cryptoKey);
     });
   });
 }
@@ -465,8 +622,10 @@ function editFol(id){
   if(!f)return;eFol=id;document.getElementById('fol-modal-title').textContent='Rename Folder';document.getElementById('f-fname').value=f.name;openModal('fol-modal');
 }
 function saveFol(){
-  var i,found=false,name=document.getElementById('f-fname').value.trim();if(!name)return;
-  var folder={id:eFol?eFol:('f'+Date.now()),name:name};setSyncStatus('syncing');
+  var i,found=false,name=document.getElementById('f-fname').value.trim();
+  if(!name)return;
+  var folder={id:eFol?eFol:('f'+Date.now()),name:name};
+  setSyncStatus('syncing');
   api({action:'saveFolder',folder:JSON.stringify(folder)},function(err){
     if(err){toast('Could not save folder',true);setSyncStatus('err');return;}
     if(eFol){for(i=0;i<S.folders.length;i++){if(S.folders[i].id===eFol){S.folders[i].name=name;found=true;break;}}}
@@ -475,7 +634,8 @@ function saveFol(){
   });
 }
 function delFol(id){
-  var i,fb=null;if(!confirm('Delete folder? Records inside will move to first available folder.'))return;
+  var i,fb=null;
+  if(!confirm('Delete folder? Records inside will move to first available folder.'))return;
   for(i=0;i<S.folders.length;i++){if(S.folders[i].id!==id){fb=S.folders[i];break;}}
   setSyncStatus('syncing');
   api({action:'deleteFolder',id:id},function(err){
@@ -500,9 +660,8 @@ function renderContent(){
   if(S.af!=='all'){for(fi=0;fi<S.folders.length;fi++){if(S.folders[fi].id===S.af){fname=S.folders[fi].name;break;}}}
   var h='<div class="folder-header">';
   if(!q){h+='<div class="folder-name">'+esc(fname)+'</div>';
-    if(S.af!=='all')h+='<div class="folder-actions"><button class="hbtn" onclick="editFol(\''+S.af+'\')">Rename</button> <button class="hbtn hbtn-del" onclick="delFol(\''+S.af+'\')">Delete</button> <button class="hbtn hbtn-add" onclick="openAddFol()">+ Folder</button></div>';
-    else h+='<div class="folder-actions"><button class="hbtn hbtn-add" onclick="openAddFol()">+ Folder</button></div>';}
-  else{h+='<div class="folder-name">Search results</div>';}
+    if(S.af!=='all')h+='<div class="folder-actions"><button class="hbtn" onclick="editFol(\''+S.af+'\')">Rename</button> <button class="hbtn hbtn-del" onclick="delFol(\''+S.af+'\')">Delete</button> <button class="hbtn hbtn-add" onclick="openAddFol()">+ Folder</button></div>';}
+  else{h+='<div class="folder-actions"><button class="hbtn hbtn-add" onclick="openAddFol()">+ Folder</button></div>';}
   h+='</div><button class="add-btn" onclick="openAddRec()">+ Add Record</button>';
   if(!recs.length){h+='<div class="empty"><p>'+(q?'No records found':'No records yet')+'</p><span>'+(q?'Try different search terms':'Tap Add Record to get started')+'</span></div>';}
   else{for(i=0;i<recs.length;i++)h+=buildCard(recs[i]);}
@@ -513,15 +672,29 @@ function buildCard(r){
   var i,fn='';for(i=0;i<S.folders.length;i++){if(S.folders[i].id===r.folderId){fn=S.folders[i].name;break;}}
   var h='<div class="rcard" id="rc-'+r.id+'" onclick="togCard(\''+r.id+'\')">';
   h+='<div class="rtop"><div class="rtitle">'+esc(r.title)+'</div><span class="rbadge">'+esc(r.type)+'</span></div>';
-  h+='<div class="rmeta">'+(fn?esc(fn)+' \u00b7 ':'')+cleanDate(r.created)+'</div>';
+  h+='<div class="rmeta">'+(fn?esc(fn)+' &middot; ':'')+cleanDate(r.created)+'</div>';
   h+='<div class="rdetail" id="rd-'+r.id+'">';
-  if(r.url){h+='<div class="rfield"><div class="rlabel">Website URL</div><div class="pw-row"><div class="rval">'+esc(r.url)+'</div><button class="sbtn lbtn" onclick="launchUrl(event,\''+r.id+'\')">&#127760; Launch</button></div></div>';}
+  if(r.url){
+    h+='<div class="rfield"><div class="rlabel">Website URL</div><div class="pw-row"><div class="rval">'+esc(r.url)+'</div>';
+    h+='<button class="sbtn lbtn" onclick="launchUrl(event,\''+r.id+'\')">&#127760; Launch</button></div></div>';
+  }
   h+='<div class="rfield"><div class="rlabel">Login / Username</div><div class="rval">'+esc(r.login||'-')+'</div></div>';
   h+='<div class="rfield"><div class="rlabel">Password</div><div class="pw-row"><span class="pw-text" id="pw-'+r.id+'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>';
   h+='<button class="sbtn" onclick="togPw(event,\''+r.id+'\')">Show</button><button class="sbtn" onclick="cpPw(event,\''+r.id+'\')">Copy</button></div></div>';
   if(r.notes)h+='<div class="rfield"><div class="rlabel">Notes</div><div class="rval">'+esc(r.notes)+'</div></div>';
-  h+='<div class="rbtns"><div style="display:flex;gap:10px"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button><button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button></div><button class="sbtn" onclick="event.stopPropagation();togCard(\''+r.id+'\')">Close</button></div>';
+  h+='<div class="rbtns"><div style="display:flex;gap:10px"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button> <button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button></div><button class="sbtn" onclick="event.stopPropagation();togCard(\''+r.id+'\')">Close</button></div>';
   h+='</div></div>';return h;
+}
+
+function togUrlField(){
+  var t=document.getElementById('f-type').value;
+  document.getElementById('f-url-group').style.display=(t==='Website')?'block':'none';
+}
+function launchUrl(e,id){
+  e.stopPropagation();
+  var r=getRec(id);if(!r||!r.url)return;
+  var url=r.url.indexOf('://')<0?'https://'+r.url:r.url;
+  window.open(url,'_blank');
 }
 
 function togCard(id){var d=document.getElementById('rd-'+id),c=document.getElementById('rc-'+id);if(d.style.display==='block'){d.style.display='none';c.className='rcard';}else{d.style.display='block';c.className='rcard open';}}
@@ -529,53 +702,68 @@ function getRec(id){var i;for(i=0;i<S.records.length;i++){if(S.records[i].id===i
 function togPw(e,id){e.stopPropagation();var r=getRec(id);if(!r)return;var el=document.getElementById('pw-'+id);if(el.getAttribute('data-shown')==='1'){el.textContent='\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7';el.removeAttribute('data-shown');}else{el.textContent=r.password;el.setAttribute('data-shown','1');}}
 function cpPw(e,id){e.stopPropagation();var r=getRec(id);if(!r)return;if(navigator.clipboard){navigator.clipboard.writeText(r.password).then(function(){toast('Password copied!');}).catch(function(){fbCopy(r.password);});}else fbCopy(r.password);}
 function fbCopy(v){var t=document.createElement('textarea');t.value=v;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('Password copied!');}
-function launchUrl(e,id){e.stopPropagation();var r=getRec(id);if(!r||!r.url)return;var url=r.url.indexOf('://')<0?'https://'+r.url:r.url;window.open(url,'_blank');}
 function togFormPw(){var inp=document.getElementById('f-pw'),btn=document.getElementById('f-pw-eye');if(inp.type==='password'){inp.type='text';btn.textContent='Hide password';}else{inp.type='password';btn.textContent='Show password';}}
 function cpFormPw(){var v=document.getElementById('f-pw').value;if(!v){toast('No password to copy',true);return;}if(navigator.clipboard){navigator.clipboard.writeText(v).then(function(){toast('Password copied!');}).catch(function(){fbCopy(v);});}else fbCopy(v);}
-function togUrlField(){document.getElementById('f-url-group').style.display=(document.getElementById('f-type').value==='Website')?'block':'none';}
 
 function fillFolSel(sel){var i,sorted=S.folders.slice().sort(function(a,b){return a.name.localeCompare(b.name);}),h='';for(i=0;i<sorted.length;i++)h+='<option value="'+sorted[i].id+'"'+(sorted[i].id===sel?' selected':'')+'>'+esc(sorted[i].name)+'</option>';document.getElementById('f-folder').innerHTML=h;}
 function openAddRec(){
-  eRec=null;document.getElementById('rec-modal-title').textContent='New Record';
-  document.getElementById('f-title').value='';document.getElementById('f-login').value='';
-  document.getElementById('f-pw').value='';document.getElementById('f-pw').type='password';
+  eRec=null;
+  document.getElementById('rec-modal-title').textContent='New Record';
+  document.getElementById('f-title').value='';
+  document.getElementById('f-login').value='';
+  document.getElementById('f-pw').value='';
+  document.getElementById('f-pw').type='password';
   document.getElementById('f-pw-eye').textContent='Show password';
-  document.getElementById('f-notes').value='';document.getElementById('f-notes').style.height='auto';
-  document.getElementById('f-type').value='Website';document.getElementById('f-url').value='';
+  document.getElementById('f-notes').value='';
+  document.getElementById('f-notes').style.height='auto';
+  document.getElementById('f-type').value='Website';
+  document.getElementById('f-url').value='';
   document.getElementById('f-url-group').style.display='block';
-  fillFolSel(S.af==='all'?(S.folders[0]?S.folders[0].id:''):S.af);openModal('rec-modal');
+  fillFolSel(S.af==='all'?(S.folders[0]?S.folders[0].id:''):S.af);
+  openModal('rec-modal');
 }
 function editRec(e,id){
-  e.stopPropagation();var r=getRec(id);if(!r)return;eRec=id;
+  e.stopPropagation();var r=getRec(id);if(!r)return;
+  eRec=id;
   document.getElementById('rec-modal-title').textContent='Edit Record';
-  document.getElementById('f-title').value=r.title;document.getElementById('f-type').value=r.type;
-  document.getElementById('f-login').value=r.login||'';document.getElementById('f-pw').value=r.password||'';
-  document.getElementById('f-pw').type='password';document.getElementById('f-pw-eye').textContent='Show password';
-  document.getElementById('f-notes').value=r.notes||'';document.getElementById('f-url').value=r.url||'';
-  togUrlField();setTimeout(function(){autoGrow(document.getElementById('f-notes'));},50);
-  fillFolSel(r.folderId);openModal('rec-modal');
+  document.getElementById('f-title').value=r.title;
+  document.getElementById('f-type').value=r.type;
+  document.getElementById('f-login').value=r.login||'';
+  document.getElementById('f-pw').value=r.password||'';
+  document.getElementById('f-pw').type='password';
+  document.getElementById('f-pw-eye').textContent='Show password';
+  document.getElementById('f-notes').value=r.notes||'';
+  document.getElementById('f-url').value=r.url||'';
+  togUrlField();
+  setTimeout(function(){autoGrow(document.getElementById('f-notes'));},50);
+  fillFolSel(r.folderId);
+  openModal('rec-modal');
 }
 function saveRec(){
   var i,title=document.getElementById('f-title').value.trim();if(!title)return;
   var ex=eRec?getRec(eRec):null;
-  var rec={id:eRec?eRec:('r'+Date.now()),title:title,type:document.getElementById('f-type').value,
-    url:document.getElementById('f-url').value.trim(),login:document.getElementById('f-login').value.trim(),
-    password:document.getElementById('f-pw').value,folderId:document.getElementById('f-folder').value,
-    notes:document.getElementById('f-notes').value.trim(),created:ex?ex.created:fmtDate(new Date())};
+  var rec={
+    id:eRec?eRec:('r'+Date.now()),
+    title:title,
+    type:document.getElementById('f-type').value,
+    url:document.getElementById('f-url').value.trim(),
+    login:document.getElementById('f-login').value.trim(),
+    password:document.getElementById('f-pw').value,
+    folderId:document.getElementById('f-folder').value,
+    notes:document.getElementById('f-notes').value.trim(),
+    created:ex?ex.created:fmtDate(new Date())
+  };
   document.getElementById('save-rec-btn').textContent='Saving...';document.getElementById('save-rec-btn').disabled=true;setSyncStatus('syncing');
   encryptRecord(rec,_cryptoKey).then(function(encRec){
-    api({action:'save',record:JSON.stringify(encRec)},function(err,res){
-      document.getElementById('save-rec-btn').textContent='Save';document.getElementById('save-rec-btn').disabled=false;
-      if(err||!res||res.error){toast('Could not save. Try again.',true);setSyncStatus('err');return;}
-      if(eRec){for(i=0;i<S.records.length;i++){if(S.records[i].id===eRec){S.records[i]=rec;break;}}}else S.records.push(rec);
-      setSyncStatus('ok');renderContent();closeModal('rec-modal');toast(eRec?'Record updated':'Record saved');
-    });
+  api({action:'save',record:JSON.stringify(encRec)},function(err,res){
+    document.getElementById('save-rec-btn').textContent='Save';document.getElementById('save-rec-btn').disabled=false;
+    if(err||!res||res.error){toast('Could not save. Try again.',true);setSyncStatus('err');return;}
+    if(eRec){for(i=0;i<S.records.length;i++){if(S.records[i].id===eRec){S.records[i]=rec;break;}}}else S.records.push(rec);
+    setSyncStatus('ok');renderContent();closeModal('rec-modal');toast(eRec?'Record updated':'Record saved');
   });
+  }); // end encryptRecord
 }
-function delRec(e,id){e.stopPropagation();if(!confirm('Delete this record? Cannot be undone.'))return;setSyncStatus('syncing');
-  api({action:'delete',id:id},function(err){if(err){toast('Could not delete.',true);setSyncStatus('err');return;}
-  S.records=S.records.filter(function(x){return x.id!==id;});setSyncStatus('ok');renderContent();toast('Deleted');});}
-
+function delRec(e,id){e.stopPropagation();if(!confirm('Delete this record? Cannot be undone.'))return;setSyncStatus('syncing');api({action:'delete',id:id},function(err){if(err){toast('Could not delete.',true);setSyncStatus('err');return;}S.records=S.records.filter(function(x){return x.id!==id;});setSyncStatus('ok');renderContent();toast('Deleted');});}
 function openSettings(){document.getElementById('s-p1').value='';document.getElementById('s-p2').value='';document.getElementById('s-msg').textContent='';openModal('set-modal');}
 function changePin(){
   var p1=document.getElementById('s-p1').value.trim(),p2=document.getElementById('s-p2').value.trim(),msg=document.getElementById('s-msg');
@@ -583,9 +771,21 @@ function changePin(){
   if(p1!==p2){msg.textContent='PINs do not match';return;}
   api({action:'setPin',pin:p1},function(err){
     if(err){msg.textContent='Could not save PIN.';return;}
+    // Re-encrypt all records with new key then lock
+    var oldKey=_cryptoKey;
     deriveKey(p1).then(function(newKey){
-      var jobs=S.records.map(function(r){return encryptRecord(r,newKey).then(function(enc){return new Promise(function(resolve){api({action:'save',record:JSON.stringify(enc)},resolve);});});});
-      Promise.all(jobs).then(function(){closeModal('set-modal');toast('PIN changed');setTimeout(lockApp,1800);});
+      var jobs=S.records.map(function(r){
+        return encryptRecord(r,newKey).then(function(enc){
+          return new Promise(function(resolve){
+            api({action:'save',record:JSON.stringify(enc)},resolve);
+          });
+        });
+      });
+      Promise.all(jobs).then(function(){
+        closeModal('set-modal');
+        toast('PIN changed — records re-encrypted');
+        setTimeout(lockApp,1800);
+      });
     });
   });
 }
@@ -597,7 +797,70 @@ for(i=0;i<mbs.length;i++){mbs[i].addEventListener('click',function(e){if(e.targe
 var _tt=null;
 function toast(msg,isErr){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(isErr?' err':'');if(_tt)clearTimeout(_tt);_tt=setTimeout(function(){t.className='toast';},2400);}
 
+// ── Inactivity timer ─────────────────────────────────────────────────────────
+var _inactTimer = null;
+var _warnTimer = null;
+var _INACTIVE_MS = 5 * 60 * 1000;  // 5 minutes
+var _WARN_MS = 4.5 * 60 * 1000;    // warn at 4m30s (30s before lock)
+
+function resetInactivityTimer() {
+  if (!_cryptoKey) return; // only run when logged in
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  // dismiss any warning
+  var t = document.getElementById('toast');
+  if (t && t.className.indexOf('warn') >= 0) t.className = 'toast';
+
+  _warnTimer = setTimeout(function() {
+    toastWarn('Locking in 30 seconds due to inactivity…');
+  }, _WARN_MS);
+
+  _inactTimer = setTimeout(function() {
+    lockApp();
+    toast('Locked due to inactivity');
+  }, _INACTIVE_MS);
+}
+
+function stopInactivityTimer() {
+  clearTimeout(_inactTimer);
+  clearTimeout(_warnTimer);
+  _inactTimer = null;
+  _warnTimer = null;
+}
+
+function toastWarn(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show warn';
+}
+
+// Reset timer on any user interaction
+['touchstart','mousedown','mousemove','keypress','scroll','click'].forEach(function(evt) {
+  document.addEventListener(evt, resetInactivityTimer, true);
+});
+
+// Lock immediately if page becomes visible after being hidden too long
+var _hiddenAt = null;
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+    _hiddenAt = Date.now();
+  } else {
+    if (_hiddenAt && _cryptoKey) {
+      var away = Date.now() - _hiddenAt;
+      if (away >= _INACTIVE_MS) {
+        lockApp();
+        toast('Locked due to inactivity');
+      } else {
+        resetInactivityTimer();
+      }
+    }
+    _hiddenAt = null;
+  }
+});
+// ── End inactivity timer ──────────────────────────────────────────────────────
+
 initPin();
+
 </script>
 </body>
 </html>
