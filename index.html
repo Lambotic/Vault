@@ -64,7 +64,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Ar
 .rval{color:var(--text2);font-size:45px;word-break:break-all;white-space:pre-wrap}
 .pw-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 .pw-text{font-family:'SF Mono','Fira Code','Courier New',monospace;letter-spacing:4px;font-size:50px;color:var(--text2)}
-.rbtns{display:flex;gap:22px;margin-top:27px}
+.rbtns{display:flex;gap:22px;margin-top:27px;justify-content:space-between;align-items:center}
 .sbtn{background:transparent;border:3px solid var(--navy3);color:var(--text2);border-radius:14px;padding:22px 40px;font-size:40px;font-weight:500;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
 .dbtn{border-color:#4a2222;color:var(--danger)}
 .lbtn{border-color:var(--gold);color:var(--gold)}
@@ -703,7 +703,7 @@ function buildCard(r){
   h+='<div class="rfield"><div class="rlabel">Password</div><div class="pw-row"><span class="pw-text" id="pw-'+r.id+'">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>';
   h+='<button class="sbtn" onclick="togPw(event,\''+r.id+'\')">Show</button><button class="sbtn" onclick="cpPw(event,\''+r.id+'\')">Copy</button></div></div>';
   if(r.notes)h+='<div class="rfield"><div class="rlabel">Notes</div><div class="rval">'+esc(r.notes)+'</div></div>';
-  h+='<div class="rbtns"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button> <button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button> <button class="sbtn" onclick="togCard(\''+r.id+'\')">Close</button></div>';
+  h+='<div class="rbtns"><div style="display:flex;gap:10px"><button class="sbtn" onclick="editRec(event,\''+r.id+'\')">Edit</button> <button class="sbtn dbtn" onclick="delRec(event,\''+r.id+'\')">Delete</button></div><button class="sbtn" onclick="event.stopPropagation();togCard(\''+r.id+'\')">Close</button></div>';
   h+='</div></div>';return h;
 }
 
