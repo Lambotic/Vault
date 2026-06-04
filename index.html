@@ -8,7 +8,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--navy:#1a2340;--navy3:#2d3a5c;--gold:#c9a84c;--text:#f0f0f0;--text2:#a0a8bb;--text3:#6b7490;--card:#1e2744;--card2:#252f50;--danger:#e24b4a;--success:#1a9e75;--r:24px;--r2:16px}
 html,body{margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--navy);color:var(--text);width:480px;transform-origin:top left;position:absolute;top:0;left:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--navy);color:var(--text);width:320px;transform-origin:top left;position:absolute;top:0;left:0}
 
 /* PIN SCREEN */
 #pin-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px}
@@ -80,7 +80,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Ar
 /* MODALS */
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,0.75);z-index:200;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
-.modal{background:var(--card);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:480px;padding:30px 28px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal{background:var(--card);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:320px;padding:30px 28px;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal-title{font-size:34px;color:var(--gold);margin-bottom:22px;font-weight:600}
 .notice{font-size:22px;color:var(--text3);text-align:center;padding:14px 18px;background:var(--navy);border-radius:var(--r2);margin-bottom:20px;line-height:1.5}
 .fg{margin-bottom:20px}
@@ -230,17 +230,17 @@ textarea.fi{resize:none;overflow:hidden;line-height:1.5}
   function applyScale() {
     var sw = window.innerWidth || document.documentElement.clientWidth || screen.width;
     var sh = window.innerHeight || document.documentElement.clientHeight || screen.height;
-    var scale = sw / 480;
+    var scale = sw / 320;
     var logicalH = Math.round(sh / scale);
     document.body.style.transform = 'scale(' + scale + ')';
     document.body.style.transformOrigin = 'top left';
-    document.body.style.width = '480px';
+    document.body.style.width = '320px';
     document.body.style.overflow = 'hidden';
     var ps = document.getElementById('pin-screen');
     var ma = document.getElementById('main-app');
-    ps.style.width = '480px';
+    ps.style.width = '320px';
     ps.style.height = logicalH + 'px';
-    ma.style.width = '480px';
+    ma.style.width = '320px';
     ma.style.height = logicalH + 'px';
     setTimeout(function() {
       var content = document.getElementById('content');
